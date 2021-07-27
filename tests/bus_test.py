@@ -34,30 +34,35 @@ class TestBus(unittest.TestCase):
 
     # @unittest.skip("Delete this line to run the test")
     def test_can_pick_up_passenger(self):
-        person = Person("Guido van Rossum", 64, 20)
+        person = Person("Guido van Rossum", 64, 20, "Ocean Terminal")
         self.bus.pick_up(person)
         self.assertEqual(1, self.bus.passenger_count())
 
     # @unittest.skip("Delete this line to run the test")
     def test_can_drop_off_passenger(self):
-        person = Person("Guido van Rossum", 64, 20)
+        person = Person("Guido van Rossum", 64, 20, "Commercial Street")
         self.bus.pick_up(person)
         self.bus.drop_off(person)
         self.assertEqual(0, self.bus.passenger_count())
 
     # @unittest.skip("Delete this line to run the test")
     def test_can_empty_bus(self):
-        person = Person("Guido van Rossum", 64, 20)
+        person = Person("Guido van Rossum", 64, 20, "Ocean Terminal")
         self.bus.pick_up(person)
         self.bus.empty()
         self.assertEqual(0, self.bus.passenger_count())
 
     # @unittest.skip("Delete this line to run the test")
     def test_can_pick_up_passenger_from_bus_stop(self):
-        person_1 = Person("Guido van Rossum", 64, 20)
-        person_2 = Person("Carol Willing", 50, 100)
+        person_1 = Person("Guido van Rossum", 68, 20, "Ocean Terminal")
+        person_2 = Person("Carol Willing", 50, 100, "Ocean Terminal")
         bus_stop = BusStop("Waverly Station")
         bus_stop.add_to_queue(person_1)
         bus_stop.add_to_queue(person_2)
         self.bus.pick_up_from_stop(bus_stop)
         self.assertEqual(2, self.bus.passenger_count())
+        self.assertEqual(3, self.bus.get_current_capacity())
+        self.assertEqual(3, self.bus.total_cash_on_bus())
+        self.assertEqual(True, self.bus.check_destinations())
+        #capacity now, how much cash on board, all passenger on right bus
+    
